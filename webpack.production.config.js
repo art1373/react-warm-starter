@@ -159,22 +159,6 @@ module.exports = [
       ],
     },
     plugins: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          compress: {
-            warnings: false,
-            drop_console: true,
-            drop_debugger: true,
-          },
-          parse: {
-            shebang: true,
-          },
-          output: {
-            comments: false,
-            beautify: false,
-          },
-        },
-      }),
       new StatsPlugin(
         'stats.json',
         {
