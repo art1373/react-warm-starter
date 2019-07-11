@@ -11,12 +11,12 @@ const {
 } = routesNames;
 
 const Routes = () => (
-    <Switch>
-        <Route exact path={home} component={Home}/>
-        <Route path={login} component={Login}/>
-        <Route path={notFound} component={NotFound}/>
-        <Redirect from={anythingElse} to={notFound}/>
-    </Switch>
+  <Switch>
+    <Route exact path={home} component={Home} />
+    <Route path={login} component={Login} />
+    <Route path={notFound} component={NotFound} />
+    <Redirect from={anythingElse} to={notFound} />
+  </Switch>
 );
 
 export default memo(Routes);
