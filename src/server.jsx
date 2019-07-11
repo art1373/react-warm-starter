@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider as ReduxProvider } from 'react-redux';
 import ReactDOMServer from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
@@ -6,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles';
 import Template from '~/utils/template';
 import Index from '~/app';
+import store from '~/redux/store';
 import theme from '~/utils/theme';
 
 const ServerRenderer = () => (req, res) => {
@@ -13,12 +15,14 @@ const ServerRenderer = () => (req, res) => {
   const sheets = new ServerStyleSheets();
   const markup = ReactDOMServer.renderToString(
     sheets.collect(
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <StaticRouter location={req.url} context={context}>
-          <Index />
-        </StaticRouter>
-      </ThemeProvider>
+      <ReduxProvider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <StaticRouter location={req.url} context={context}>
+            <Index />
+          </StaticRouter>
+        </ThemeProvider>
+      </ReduxProvider>
     )
   );
   const helmet = Helmet.renderStatic();
@@ -29,6 +33,7 @@ const ServerRenderer = () => (req, res) => {
       helmet,
       jss,
       markup,
+      store,
     })
   );
 };
