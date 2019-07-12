@@ -8,8 +8,3 @@ export const Decrement = value => ({
   type: 'DECREMENT',
   value,
 });
-
-export const GetData = data => ({
-  type: 'GET_DATA_SUCCESSFULLY',
-  data,
-});

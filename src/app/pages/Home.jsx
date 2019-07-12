@@ -9,7 +9,7 @@ const Home = ({ classes, count }) => (
   <div className={classes.root}>
     <Helmet title="home" />
     <div>Home</div>
-    <div>{count.toString()}</div>
+    <div>{count}</div>
   </div>
 );
 

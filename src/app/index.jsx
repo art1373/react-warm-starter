@@ -6,10 +6,10 @@ const Index = () => (
   <>
     <Helmet
       htmlAttributes={{ amp: undefined, lang: 'en' }}
-      titleTemplate="%s | Arvan Cloud Gates"
+      titleTemplate="%s | website.ir"
       titleAttributes={{ itemprop: 'name', lang: 'en' }}
       meta={[
-        { content: 'Arvan Cloud Gates', name: 'description' },
+        { content: 'website.ir', name: 'description' },
         { content: 'width=device-width, initial-scale=1', name: 'viewport' },
       ]}
       script={[
