@@ -21,6 +21,6 @@ const call = options => {
     .catch(err => console.log(err));
 };
 
-export const get = (url, data) => call({ data, method: 'GET', url });
+export const get = url => call({ method: 'GET', url });
 
 export const post = (url, data) => call({ data, method: 'POST', url });

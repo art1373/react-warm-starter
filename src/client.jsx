@@ -6,8 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
 import Index from '~/app';
-import store from '~/redux/store';
 import theme from '~/utils/theme';
+import store from '~/redux/store';
+
+// const initialStore = window.__Store__;
+// const store = initialStore;
 
 const ClientRender = () => {
   useEffect(() => {
@@ -22,18 +25,15 @@ const ClientRender = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Index />
-      </BrowserRouter>
-    </ThemeProvider>
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <BrowserRouter>
+          <Index />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ReduxProvider>
   );
 };
 
-hydrate(
-  <ReduxProvider store={store}>
-    <ClientRender />
-  </ReduxProvider>,
-  document.getElementById('root')
-);
+hydrate(<ClientRender />, document.getElementById('root'));

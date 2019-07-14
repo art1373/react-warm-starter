@@ -1,5 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 const path = require('path');
+const webpack = require('webpack');
+const getClientEnvironment = require('./src/utils/env');
 
 const assetsDirName = 'assets';
 const outputImagesDirName = 'img';
@@ -7,12 +9,23 @@ const outputFontsDirName = 'font';
 
 const distDir = path.join(__dirname, assetsDirName);
 const srcDir = path.join(__dirname, './src');
+const env = getClientEnvironment('development');
 
 module.exports = [
   {
     name: 'client',
     target: 'web',
     mode: 'development',
+    node: {
+      module: 'empty',
+      dgram: 'empty',
+      dns: 'mock',
+      fs: 'empty',
+      http2: 'empty',
+      net: 'empty',
+      tls: 'empty',
+      child_process: 'empty',
+    },
     entry: {
       client: `${srcDir}/client.jsx`,
       vendor: ['react', 'react-dom', 'react-helmet', 'react-router-dom'],
@@ -77,6 +90,7 @@ module.exports = [
         },
       },
     },
+    plugins: [new webpack.DefinePlugin(env.stringified)],
   },
   {
     name: 'server',
@@ -130,5 +144,6 @@ module.exports = [
         },
       ],
     },
+    plugins: [new webpack.DefinePlugin(env.stringified)],
   },
 ];

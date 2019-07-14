@@ -1,14 +1,11 @@
 import { combineReducers } from 'redux';
 
-const counter = (state = { count: 0 }, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
+const articlesList = (state = {}, { type, payload }) => {
+  switch (type) {
+    case 'SET_ARTICLES_LIST':
       return {
-        count: state.count + action.value,
-      };
-    case 'DECREMENT':
-      return {
-        count: state.count - action.value,
+        ...state,
+        ...payload,
       };
     default:
       return state;
@@ -16,5 +13,5 @@ const counter = (state = { count: 0 }, action) => {
 };
 
 export default combineReducers({
-  counter,
+  articlesList,
 });
