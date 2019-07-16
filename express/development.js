@@ -14,6 +14,9 @@ const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
 app.use(
   webpackDevMiddleware(compiler, {
     publicPath: `/${assetsDirName}`,
+    watchOptions: {
+      ignored: [/node_modules[\\/]/],
+    },
   })
 );
 
