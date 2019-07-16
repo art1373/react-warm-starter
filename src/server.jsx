@@ -5,6 +5,7 @@ import { StaticRouter } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles';
+import { SnackBarSupplier } from 'material-snackbar-supplier';
 import Template from '~/utils/template';
 import Index from '~/app';
 import store from '~/redux/store';
@@ -19,7 +20,9 @@ const ServerRenderer = () => (req, res) => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <StaticRouter location={req.url} context={context}>
-            <Index />
+            <SnackBarSupplier settings={{ autoHideDuration: 1500 }}>
+              <Index />
+            </SnackBarSupplier>
           </StaticRouter>
         </ThemeProvider>
       </ReduxProvider>
