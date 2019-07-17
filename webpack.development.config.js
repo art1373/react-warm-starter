@@ -44,6 +44,8 @@ module.exports = [
         'redux-saga',
         'serialize-javascript',
         'classnames',
+        '@babel/polyfill',
+        'yup',
       ],
     },
     output: {

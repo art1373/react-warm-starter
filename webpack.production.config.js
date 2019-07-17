@@ -47,6 +47,7 @@ module.exports = [
         'serialize-javascript',
         'classnames',
         '@babel/polyfill',
+        'yup',
       ],
     },
     output: {

@@ -2,10 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
 import { Field } from 'formik';
+import { createStyles, withStyles } from '~/utils/helpers';
 
 const InputText = ({
+  type,
   field: { value, name },
-  form: { handleChange, handleBlur, handleFocus /* , errors */ },
+  form: { handleChange, handleBlur, handleFocus, errors = {} },
   ...rest
 }) => (
   <TextField
@@ -15,7 +17,11 @@ const InputText = ({
     onFocus={handleFocus}
     onChange={handleChange}
     value={value}
-    // test={console.log('--errors: ', errors)}
+    variant="outlined"
+    type={type}
+    error={!!errors[name]}
+    helperText={errors[name] || ' '}
+    {...(errors[name] ? { test: errors[name] } : {})}
   />
 );
 
@@ -23,13 +29,29 @@ InputText.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
   form: PropTypes.shape({
-    errors: PropTypes.object.isRequired,
-    handleBlur: PropTypes.func.isRequired,
-    handleChange: PropTypes.func.isRequired,
-    handleFocus: PropTypes.func.isRequired,
-  }).isRequired,
+    errors: PropTypes.object,
+    handleBlur: PropTypes.func,
+    handleChange: PropTypes.func,
+    handleFocus: PropTypes.func,
+  }),
+  type: PropTypes.string,
 };
 
-export default props => <Field {...props} component={InputText} />;
+InputText.defaultProps = {
+  field: {},
+  form: {},
+  type: 'text',
+};
+
+const styles = ({ spacing }) =>
+  createStyles({
+    root: {
+      margin: [[spacing(1), 0]],
+    },
+  });
+
+export default props => (
+  <Field {...props} component={withStyles(styles)(InputText)} />
+);

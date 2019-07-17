@@ -17,6 +17,8 @@ const FormButton = ({
     name={type}
     onClick={handleClick}
     disabled={!dirty && !isSubmitting}
+    color="primary"
+    variant={type === 'submit' ? 'contained' : 'outlined'}
     href={undefined}
   >
     {label}
@@ -25,15 +27,15 @@ const FormButton = ({
 
 FormButton.propTypes = {
   form: PropTypes.shape({
-    dirty: PropTypes.bool.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
-    ...PropTypes.object,
-  }).isRequired,
+    dirty: PropTypes.bool,
+    isSubmitting: PropTypes.bool,
+  }),
   label: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['submit', 'reset']),
 };
 
 FormButton.defaultProps = {
+  form: {},
   type: 'submit',
 };
 

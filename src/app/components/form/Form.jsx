@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik, Form as FormikForm } from 'formik';
 
-const Form = ({ render, children, ...rest }) => (
+const Form = ({ render, children, className, ...rest }) => (
   <Formik
     {...rest}
-    render={props => <FormikForm {...props}>{children}</FormikForm>}
+    render={() => <FormikForm className={className}>{children}</FormikForm>}
   />
 );
 
@@ -15,6 +15,7 @@ Form.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.func,
   ]).isRequired,
+  className: PropTypes.string,
   render: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
@@ -23,6 +24,7 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
+  className: undefined,
   render: undefined,
 };
 
