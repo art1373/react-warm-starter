@@ -28,6 +28,7 @@
     "dotenv": "^8.0.0",
     "dotenv-expand": "^5.1.0",
     "formik": "^1.5.8",
+    "material-snackbar-supplier": "^1.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",

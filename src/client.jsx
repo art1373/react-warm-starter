@@ -5,7 +5,7 @@ import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ThemeProvider from '@material-ui/styles/ThemeProvider';
-// import { SnackBarSupplier } from 'material-snackbar-supplier';
+import { SnackBarSupplier } from 'material-snackbar-supplier';
 import Index from '~/app';
 import theme from '~/utils/theme';
 import store from '~/redux/store';
@@ -30,9 +30,9 @@ const ClientRender = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          {/* <SnackBarSupplier settings={{ autoHideDuration: 1500 }}> */}
-          <Index />
-          {/* </SnackBarSupplier> */}
+          <SnackBarSupplier settings={{ autoHideDuration: 1500 }}>
+            <Index />
+          </SnackBarSupplier>
         </BrowserRouter>
       </ThemeProvider>
     </ReduxProvider>
