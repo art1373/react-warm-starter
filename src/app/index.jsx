@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Helmet from 'react-helmet';
 import Routes from '~/app/routes/Routes';
+import { withStyles } from '~/utils/helpers';
+import globalStyles from '~/utils/globalStyles';
 
 const Index = () => {
   const [login, setLogin] = useState(false);
@@ -33,4 +35,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default withStyles(globalStyles)(Index);
