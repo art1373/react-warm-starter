@@ -31,7 +31,22 @@ module.exports = [
     },
     entry: {
       client: `${srcDir}/client.jsx`,
-      vendor: ['react', 'react-dom', 'react-helmet', 'react-router-dom'],
+      vendor: [
+        'react',
+        'react-dom',
+        'react-helmet',
+        'react-router-dom',
+        'axios',
+        'dotenv',
+        'dotenv-expand',
+        'formik',
+        'material-snackbar-supplier',
+        'redux',
+        'react-redux',
+        'redux-saga',
+        'serialize-javascript',
+        'classnames',
+      ],
     },
     output: {
       path: distDir,

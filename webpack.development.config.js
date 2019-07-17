@@ -1,6 +1,7 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 const path = require('path');
 const webpack = require('webpack');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const getClientEnvironment = require('./src/utils/env');
 
 const assetsDirName = 'assets';
@@ -28,7 +29,22 @@ module.exports = [
     },
     entry: {
       client: `${srcDir}/client.jsx`,
-      vendor: ['react', 'react-dom', 'react-helmet', 'react-router-dom'],
+      vendor: [
+        'react',
+        'react-dom',
+        'react-helmet',
+        'react-router-dom',
+        'axios',
+        'dotenv',
+        'dotenv-expand',
+        'formik',
+        'material-snackbar-supplier',
+        'redux',
+        'react-redux',
+        'redux-saga',
+        'serialize-javascript',
+        'classnames',
+      ],
     },
     output: {
       path: distDir,
@@ -90,7 +106,13 @@ module.exports = [
         },
       },
     },
-    plugins: [new webpack.DefinePlugin(env.stringified)],
+    plugins: [
+      new webpack.DefinePlugin(env.stringified),
+      new BundleAnalyzerPlugin({
+        analyzerPort: 6985,
+        openAnalyzer: true,
+      }),
+    ],
   },
   {
     name: 'server',
