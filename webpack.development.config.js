@@ -38,7 +38,7 @@ module.exports = [
         'dotenv',
         'dotenv-expand',
         'formik',
-        'material-snackbar-supplier',
+        // 'material-snackbar-supplier',
         'redux',
         'react-redux',
         'redux-saga',
