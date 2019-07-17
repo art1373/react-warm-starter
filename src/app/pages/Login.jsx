@@ -58,7 +58,7 @@ Login.propTypes = {
   showSnackBar: PropTypes.func.isRequired,
 };
 
-const styles = ({ palette, spacing }) =>
+const styles = ({ palette, spacing, shape, shadows }) =>
   createStyles({
     buttonWrapper: {
       justifyContent: 'space-between',
@@ -72,6 +72,8 @@ const styles = ({ palette, spacing }) =>
     },
     form: {
       backgroundColor: palette.grey[100],
+      borderRadius: shape.borderRadius,
+      boxShadow: shadows[2],
       padding: spacing(2),
     },
     inputWrapper: {
