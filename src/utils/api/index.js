@@ -7,10 +7,8 @@ const _instance = axios.create({
   timeout,
 });
 
-const call = options => {
-  const { method, url, data } = options;
-
-  return _instance
+const call = ({ method, url, data }) =>
+  _instance
     .request({
       data,
       headers: '',
@@ -18,8 +16,7 @@ const call = options => {
       url,
     })
     .then(res => res.data)
-    .catch(err => console.log(err));
-};
+    .catch(({ errors }) => errors);
 
 export const get = url => call({ method: 'GET', url });
 

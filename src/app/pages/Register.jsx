@@ -1,6 +1,5 @@
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -13,20 +12,23 @@ import {
   Grid,
   Typography,
 } from '~/app/components';
-import { LoginSchema } from '~/utils/validations';
-import { sendLoginData } from '~/redux/actions';
-import routesNames from '~/utils/routesNames';
+import { RegisterSchema } from '~/utils/validations';
+import { sendRegisterData } from '~/redux/actions';
 
-const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
+const Register = ({
+  showSnackBar,
+  classes,
+  submitRegister,
+  error,
+  errorMessage,
+}) => {
   useEffect(
     () =>
       error &&
-      Object.keys(errorMessage).forEach(err =>
-        showSnackBar({
-          message: err || 'Login Failed! User name and/or Password is invalid',
-          variant: 'error',
-        })
-      ),
+      showSnackBar({
+        message: errorMessage || 'Something is wrong',
+        variant: 'error',
+      }),
     [error]
   );
   return (
@@ -37,9 +39,10 @@ const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
           initialValues={{
             email: '',
             password: '',
+            username: '',
           }}
-          validationSchema={LoginSchema}
-          onSubmit={submitLogin}
+          validationSchema={RegisterSchema}
+          onSubmit={submitRegister}
           // onSuccess={console.log}
           // onFailure={console.log}
           className={classes.form}
@@ -50,8 +53,9 @@ const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
               align="center"
               className={classes.typography}
             >
-              LOGIN
+              REGISTER
             </Typography>
+            <InputText name="username" label="Username" type="text" />
             <InputText
               name="email"
               label="Email"
@@ -61,16 +65,8 @@ const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
             <InputText name="password" label="Password" type="password" />
           </Grid>
           <Grid className={classes.buttonWrapper}>
-            <FormButton fullWidth type="submit" label="login" />
-            {/* <FormButton type="reset" label="reset" variant="filled" /> */}
-          </Grid>
-          <Grid>
-            <Typography variant="h6" className={classes.registerHint}>
-              <span>Don’t have account? </span>
-              <Link to={routesNames.register} className={classes.link}>
-                Register Now
-              </Link>
-            </Typography>
+            <FormButton type="submit" label="register" />
+            <FormButton type="reset" label="reset" variant="filled" />
           </Grid>
         </Form>
       </Grid>
@@ -78,16 +74,16 @@ const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
   );
 };
 
-Login.propTypes = {
+Register.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   showSnackBar: PropTypes.func.isRequired,
 };
 
-const styles = ({ palette, spacing, shape, typography }) =>
+const styles = ({ palette, spacing, shape, shadows }) =>
   createStyles({
     buttonWrapper: {
       justifyContent: 'space-between',
-      marginTop: spacing(2),
+      marginTop: spacing(5),
     },
     container: {
       alignItems: 'center',
@@ -96,8 +92,9 @@ const styles = ({ palette, spacing, shape, typography }) =>
       justifyContent: 'center',
     },
     form: {
-      backgroundColor: palette.formBackground,
+      backgroundColor: palette.grey[100],
       borderRadius: shape.borderRadius,
+      boxShadow: shadows[2],
       padding: spacing(2),
     },
     inputWrapper: {
@@ -105,17 +102,7 @@ const styles = ({ palette, spacing, shape, typography }) =>
       minHeight: spacing(20),
       width: spacing(50),
     },
-    link: {
-      color: palette.common.black,
-      fontWeight: typography.fontWeightBold,
-      textDecoration: 'none',
-    },
-    registerHint: {
-      fontSize: typography.fontSize,
-      marginTop: spacing(2),
-    },
     typography: {
-      color: palette.formHeader,
       margin: [[spacing(4), 0]],
     },
   });
@@ -123,9 +110,12 @@ const styles = ({ palette, spacing, shape, typography }) =>
 export default compose(
   memo,
   connect(
-    ({ login: { error, errorMessage } = {} } = {}) => ({ error, errorMessage }),
-    dispatch => ({ submitLogin: user => dispatch(sendLoginData(user)) })
+    ({ register: { error, errorMessage } = {} } = {}) => ({
+      error,
+      errorMessage,
+    }),
+    dispatch => ({ submitRegister: user => dispatch(sendRegisterData(user)) })
   ),
   withSnackBar,
   withStyles(styles)
-)(Login);
+)(Register);

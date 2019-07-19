@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { Home, Login, NotFound } from '~/app/pages';
+import { Home, Login, NotFound, Register } from '~/app/pages';
 import routesNames from '~/utils/routesNames';
 
-const { home, login: loginRoute, notFound, anythingElse } = routesNames;
+const { home, login: loginRoute, notFound, anythingElse, register } = routesNames;
 
 const Routes = ({ login }) =>
   login ? (
@@ -16,6 +16,7 @@ const Routes = ({ login }) =>
   ) : (
     <Switch>
       <Route path={loginRoute} component={Login} />
+      <Route path={register} component={Register} />
       <Redirect from={anythingElse} to={loginRoute} />
     </Switch>
   );

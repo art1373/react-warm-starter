@@ -3,4 +3,5 @@ export default {
   home: '/',
   login: '/login',
   notFound: '/404',
+  register: '/register',
 };

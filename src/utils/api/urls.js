@@ -1,6 +1,6 @@
 const url = {
   articles: {
-    list: '/articles',
+    list: '/api/articles',
   },
   auth: {
     login: '/api/users/login',

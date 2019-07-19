@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'formik';
-import { Button } from '@material-ui/core';
+import { Button } from '~/app/components';
 
 const submitButtonType = {
   reset: 'handleReset',
@@ -9,6 +9,7 @@ const submitButtonType = {
 };
 
 const FormButton = ({
+  disableAfterSubmit,
   type,
   label,
   form: {
@@ -17,21 +18,22 @@ const FormButton = ({
     [submitButtonType[type]]: handleClick,
     errors = {},
   },
+  ...rest
 }) => {
   const isTypeSubmit = type === 'submit';
 
   return (
     <Button
+      {...rest}
       name={type}
       onClick={handleClick}
       disabled={
         !dirty ||
-        isSubmitting ||
+        (disableAfterSubmit && isTypeSubmit && isSubmitting) ||
         (isTypeSubmit && Object.keys(errors).length > 0)
       }
       color="primary"
       variant={isTypeSubmit ? 'contained' : 'outlined'}
-      href={undefined}
     >
       {label}
     </Button>
@@ -39,6 +41,7 @@ const FormButton = ({
 };
 
 FormButton.propTypes = {
+  disableAfterSubmit: PropTypes.bool,
   form: PropTypes.shape({
     dirty: PropTypes.bool,
     errors: PropTypes.object,
@@ -49,6 +52,7 @@ FormButton.propTypes = {
 };
 
 FormButton.defaultProps = {
+  disableAfterSubmit: undefined,
   form: {},
   type: 'submit',
 };

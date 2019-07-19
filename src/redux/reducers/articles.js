@@ -1,5 +1,3 @@
-import { combineReducers } from 'redux';
-
 const articlesList = (state = {}, { type, payload }) => {
   switch (type) {
     case 'SET_ARTICLES_LIST':
@@ -12,6 +10,4 @@ const articlesList = (state = {}, { type, payload }) => {
   }
 };
 
-export default combineReducers({
-  articlesList,
-});
+export default articlesList;

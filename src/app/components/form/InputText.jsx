@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '@material-ui/core';
 import { Field } from 'formik';
-import { createStyles, withStyles } from '~/utils/helpers';
+import { TextField } from '~/app/components';
 
 const InputText = ({
   type,
@@ -45,13 +44,4 @@ InputText.defaultProps = {
   type: 'text',
 };
 
-const styles = ({ spacing }) =>
-  createStyles({
-    root: {
-      margin: [[spacing(1), 0]],
-    },
-  });
-
-export default props => (
-  <Field {...props} component={withStyles(styles)(InputText)} />
-);
+export default props => <Field {...props} component={InputText} />;

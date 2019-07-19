@@ -1,6 +1,4 @@
-/* eslint-disable sort-keys-fix/sort-keys-fix */
-import '@babel/polyfill';
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import {
   setArticlesList,
   failArticlesList,
@@ -18,6 +16,4 @@ function* getArticlesListSaga() {
   }
 }
 
-export default function* rootSaga() {
-  yield all([takeLatest(GET_ARTICLES_LIST, getArticlesListSaga)]);
-}
+export default takeLatest(GET_ARTICLES_LIST, getArticlesListSaga);
