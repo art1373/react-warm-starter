@@ -4,29 +4,31 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { Home, Login, NotFound, Register } from '~/app/pages';
 import routesNames from '~/utils/routesNames';
 
-const { home, login: loginRoute, notFound, anythingElse, register } = routesNames;
+const { home, login, notFound, anythingElse, register } = routesNames;
 
-const Routes = ({ login }) =>
-  login ? (
+const Routes = ({ isUserLogin }) =>
+  isUserLogin ? (
     <Switch>
       <Route exact path={home} component={Home} />
       <Route path={notFound} component={NotFound} />
+      <Redirect from={login} to={home} />
+      <Redirect from={register} to={home} />
       <Redirect from={anythingElse} to={notFound} />
     </Switch>
   ) : (
     <Switch>
-      <Route path={loginRoute} component={Login} />
+      <Route path={login} component={Login} />
       <Route path={register} component={Register} />
-      <Redirect from={anythingElse} to={loginRoute} />
+      <Redirect from={anythingElse} to={login} />
     </Switch>
   );
 
 Routes.propTypes = {
-  login: PropTypes.bool,
+  isUserLogin: PropTypes.bool,
 };
 
 Routes.defaultProps = {
-  login: false,
+  isUserLogin: false,
 };
 
 export default memo(Routes);

@@ -18,6 +18,7 @@ export const failLoginData = error => ({
   error,
 });
 
-export const successFulLogin = () => ({
+export const successFulLogin = profile => ({
   type: SUCCESSFUL_LOGIN,
+  profile
 });

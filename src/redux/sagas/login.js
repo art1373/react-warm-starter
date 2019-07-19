@@ -7,12 +7,13 @@ import {
 } from '~/redux/actions';
 import { post } from '~/utils/api';
 import url from '~/utils/api/urls';
+import { writeProfile } from '~/utils/helpers';
 
 function* sendLoginDataSaga({ user }) {
   try {
-    const data = yield call(post, url.auth.login, { user });
-    console.log('login is sucessfull', data);
-    yield put(successFulLogin());
+    const { user: profile } = yield call(post, url.auth.login, { user });
+    yield put(successFulLogin(profile));
+    writeProfile(profile);
   } catch ({ errors }) {
     yield put(failLoginData(errors));
     yield put(revertFailAction());

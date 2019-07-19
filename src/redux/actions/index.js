@@ -23,11 +23,9 @@ import {
 // register actions
 import {
   sendRegisterData,
-  successfulRegister,
   failRegisterData,
   revertFailAction as revertFailActionForRegister,
   SEND_REGISTER_DATA,
-  SUCCESSFUL_REGISTER,
   FAIL_REGISTER_DATA,
   REVERT_FAIL_ACTION as REVERT_FAIL_ACTION_FOR_REGISTER,
 } from './register';
@@ -51,11 +49,9 @@ export {
   SUCCESSFUL_LOGIN,
   // export register actions
   sendRegisterData,
-  successfulRegister,
   revertFailActionForRegister,
   failRegisterData,
   SEND_REGISTER_DATA,
-  SUCCESSFUL_REGISTER,
   FAIL_REGISTER_DATA,
   REVERT_FAIL_ACTION_FOR_REGISTER,
 };

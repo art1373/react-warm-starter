@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Provider as ReduxProvider } from 'react-redux';
 import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,12 +9,19 @@ import { SnackBarSupplier } from 'material-snackbar-supplier';
 import Index from '~/app';
 import theme from '~/utils/theme';
 import store from '~/redux/store';
+import { readProfile } from '~/utils/helpers';
 
 // const initialStore = window.__Store__;
 // const store = initialStore;
 
 const ClientRender = () => {
+  const [isLogin, setLogin] = useState(false);
+
   useEffect(() => {
+    const userIsLogin = !!readProfile('token');
+    if (userIsLogin) {
+      setLogin(true);
+    }
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.remove();
@@ -35,7 +42,7 @@ const ClientRender = () => {
             anchorOriginHorizontal="right"
             anchorOriginVertical="top"
           >
-            <Index />
+            <Index isLogin={isLogin} />
           </SnackBarSupplier>
         </BrowserRouter>
       </ThemeProvider>

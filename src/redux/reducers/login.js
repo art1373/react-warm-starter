@@ -4,7 +4,7 @@ import {
   SUCCESSFUL_LOGIN,
 } from '~/redux/actions';
 
-const loginError = (state = {}, { type, error }) => {
+const loginError = (state = {}, { type, error, profile }) => {
   switch (type) {
     case FAIL_LOGIN_DATA:
       return {
@@ -22,6 +22,7 @@ const loginError = (state = {}, { type, error }) => {
         ...state,
         error: undefined,
         errorMessage: undefined,
+        profile,
         userIsLogin: true,
       };
     default:
