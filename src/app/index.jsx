@@ -1,38 +1,55 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Routes from '~/app/routes/Routes';
-import { withStyles } from '~/utils/helpers';
+import { withStyles, readProfile } from '~/utils/helpers';
 import globalStyles from '~/utils/globalStyles';
 
-const Index = ({ userIsLogin, isLogin }) => (
-  <>
-    <Helmet
-      htmlAttributes={{ amp: undefined, lang: 'en' }}
-      titleTemplate="%s | website.ir"
-      titleAttributes={{ itemprop: 'name', lang: 'en' }}
-      meta={[
-        { content: 'website.ir', name: 'description' },
-        { content: 'width=device-width, initial-scale=1', name: 'viewport' },
-      ]}
-      script={[
-        { defer: undefined, src: '/assets/js/vendor.js' },
-        { defer: undefined, src: '/assets/js/client.js' },
-      ]}
-    />
-    <Routes isUserLogin={userIsLogin || isLogin} />
-  </>
-);
+const Index = ({ userIsLogin }) => {
+  const [isLogin, setLogin] = useState(false);
+  const mounted = useRef();
+  useEffect(() => {
+    const uil = !!readProfile('token');
+    if (uil) {
+      setLogin(true);
+    }
+  }, []);
+  // eslint-disable-next-line
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+    } else {
+      const uil = !!readProfile('token');
+      setLogin(uil);
+    }
+  });
+  return (
+    <>
+      <Helmet
+        htmlAttributes={{ amp: undefined, lang: 'en' }}
+        titleTemplate="%s | website.ir"
+        titleAttributes={{ itemprop: 'name', lang: 'en' }}
+        meta={[
+          { content: 'website.ir', name: 'description' },
+          { content: 'width=device-width, initial-scale=1', name: 'viewport' },
+        ]}
+        script={[
+          { defer: undefined, src: '/assets/js/vendor.js' },
+          { defer: undefined, src: '/assets/js/client.js' },
+        ]}
+      />
+      <Routes isUserLogin={userIsLogin || isLogin} />
+    </>
+  );
+};
 
 Index.propTypes = {
-  isLogin: PropTypes.bool,
   userIsLogin: PropTypes.bool,
 };
 
 Index.defaultProps = {
-  isLogin: undefined,
   userIsLogin: undefined,
 };
 
