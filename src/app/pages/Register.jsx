@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { withSnackBar } from 'material-snackbar-supplier';
+import { Link } from 'react-router-dom';
 import { withStyles, createStyles } from '~/utils/helpers';
 import {
   Form,
@@ -14,6 +15,7 @@ import {
 } from '~/app/components';
 import { RegisterSchema } from '~/utils/validations';
 import { sendRegisterData } from '~/redux/actions';
+import routesNames from '~/utils/routesNames';
 
 const Register = ({
   showSnackBar,
@@ -65,8 +67,16 @@ const Register = ({
             <InputText name="password" label="Password" type="password" />
           </Grid>
           <Grid className={classes.buttonWrapper}>
-            <FormButton type="submit" label="register" />
-            <FormButton type="reset" label="reset" variant="filled" />
+            <FormButton fullWidth type="submit" label="register" />
+            {/* <FormButton type="reset" label="reset" variant="filled" /> */}
+          </Grid>
+          <Grid>
+            <Typography variant="h6" className={classes.loginHint}>
+              <span>AlreadyRegistered? </span>
+              <Link to={routesNames.login} className={classes.link}>
+                Login
+              </Link>
+            </Typography>
           </Grid>
         </Form>
       </Grid>
@@ -79,11 +89,11 @@ Register.propTypes = {
   showSnackBar: PropTypes.func.isRequired,
 };
 
-const styles = ({ palette, spacing, shape, shadows }) =>
+const styles = ({ palette, spacing, shape, typography }) =>
   createStyles({
     buttonWrapper: {
       justifyContent: 'space-between',
-      marginTop: spacing(5),
+      marginTop: spacing(2),
     },
     container: {
       alignItems: 'center',
@@ -92,9 +102,8 @@ const styles = ({ palette, spacing, shape, shadows }) =>
       justifyContent: 'center',
     },
     form: {
-      backgroundColor: palette.grey[100],
+      backgroundColor: palette.formBackground,
       borderRadius: shape.borderRadius,
-      boxShadow: shadows[2],
       padding: spacing(2),
     },
     inputWrapper: {
@@ -102,7 +111,17 @@ const styles = ({ palette, spacing, shape, shadows }) =>
       minHeight: spacing(20),
       width: spacing(50),
     },
+    link: {
+      color: palette.common.black,
+      fontWeight: typography.fontWeightBold,
+      textDecoration: 'none',
+    },
+    loginHint: {
+      fontSize: typography.fontSize,
+      marginTop: spacing(2),
+    },
     typography: {
+      color: palette.formHeader,
       margin: [[spacing(4), 0]],
     },
   });
