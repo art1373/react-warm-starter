@@ -2,10 +2,13 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 
 const theme = createMuiTheme({
   palette: {
+    arvanGrey: '#818a91',
     background: {
       default: '#fff',
     },
     error: {
+      contrastText: '#d9534f',
+      dark: '#efdfdf',
       main: '#c15046',
     },
     formBackground: '#eceeef',

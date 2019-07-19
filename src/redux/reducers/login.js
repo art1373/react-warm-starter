@@ -1,4 +1,8 @@
-import { FAIL_LOGIN_DATA, REVERT_FAIL_ACTION } from '~/redux/actions';
+import {
+  FAIL_LOGIN_DATA,
+  REVERT_FAIL_ACTION,
+  SUCCESSFUL_LOGIN,
+} from '~/redux/actions';
 
 const loginError = (state = {}, { type, error }) => {
   switch (type) {
@@ -12,6 +16,13 @@ const loginError = (state = {}, { type, error }) => {
       return {
         ...state,
         error: undefined,
+      };
+    case SUCCESSFUL_LOGIN:
+      return {
+        ...state,
+        error: undefined,
+        errorMessage: undefined,
+        userIsLogin: true,
       };
     default:
       return state;

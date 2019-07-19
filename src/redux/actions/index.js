@@ -14,9 +14,11 @@ import {
   sendLoginData,
   failLoginData,
   revertFailAction,
+  successFulLogin,
   SEND_LOGIN_DATA,
   FAIL_LOGIN_DATA,
   REVERT_FAIL_ACTION,
+  SUCCESSFUL_LOGIN,
 } from './login';
 // register actions
 import {
@@ -42,9 +44,11 @@ export {
   sendLoginData,
   failLoginData,
   revertFailAction,
+  successFulLogin,
   SEND_LOGIN_DATA,
   FAIL_LOGIN_DATA,
   REVERT_FAIL_ACTION,
+  SUCCESSFUL_LOGIN,
   // export register actions
   sendRegisterData,
   successfulRegister,

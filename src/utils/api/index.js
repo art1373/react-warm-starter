@@ -7,17 +7,20 @@ const _instance = axios.create({
   timeout,
 });
 
-const call = ({ method, url, data }) =>
-  _instance
-    .request({
-      data,
+const _call = async ({ method, url, data: dataBody }) => {
+  try {
+    const { data } = await _instance.request({
+      data: dataBody,
       headers: '',
       method,
       url,
-    })
-    .then(res => res.data)
-    .catch(({ errors }) => errors);
+    });
+    return data;
+  } catch ({ response: { data } = {} }) {
+    throw data;
+  }
+};
 
-export const get = url => call({ method: 'GET', url });
+export const get = url => _call({ method: 'GET', url });
 
-export const post = (url, data) => call({ data, method: 'POST', url });
+export const post = (url, data) => _call({ data, method: 'POST', url });

@@ -16,14 +16,21 @@ import {
 import { LoginSchema } from '~/utils/validations';
 import { sendLoginData } from '~/redux/actions';
 import routesNames from '~/utils/routesNames';
+import { unknownError, loginFailed } from '~/utils/constants';
 
 const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
   useEffect(
     () =>
       error &&
-      Object.keys(errorMessage).forEach(err =>
+      Object.entries(errorMessage || {}).forEach(err =>
         showSnackBar({
-          message: err || 'Login Failed! User name and/or Password is invalid',
+          message:
+            (
+              <span className={classes.snackBarErrorText}>
+                <b>{loginFailed}</b>
+                {` ${err[0]} ${err[1]}`}
+              </span>
+            ) || unknownError,
           variant: 'error',
         })
       ),
@@ -113,6 +120,9 @@ const styles = ({ palette, spacing, shape, typography }) =>
     registerHint: {
       fontSize: typography.fontSize,
       marginTop: spacing(2),
+    },
+    snackBarErrorText: {
+      color: palette.error.contrastText,
     },
     typography: {
       color: palette.formHeader,

@@ -30,7 +30,11 @@ const ClientRender = () => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <BrowserRouter>
-          <SnackBarSupplier settings={{ autoHideDuration: 3000 }}>
+          <SnackBarSupplier
+            settings={{ autoHideDuration: 3000 }}
+            anchorOriginHorizontal="right"
+            anchorOriginVertical="top"
+          >
             <Index />
           </SnackBarSupplier>
         </BrowserRouter>

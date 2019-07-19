@@ -21,7 +21,11 @@ const ServerRenderer = () => (req, res) => {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <StaticRouter location={req.url} context={context}>
-            <SnackBarSupplier settings={{ autoHideDuration: 3000 }}>
+            <SnackBarSupplier
+              settings={{ autoHideDuration: 3000 }}
+              anchorOriginHorizontal="right"
+              anchorOriginVertical="top"
+            >
               <Index />
             </SnackBarSupplier>
           </StaticRouter>

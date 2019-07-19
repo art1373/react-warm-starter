@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import axios from 'axios';
 import {
+  successFulLogin,
   failLoginData,
   revertFailAction,
   SEND_LOGIN_DATA,
@@ -8,17 +8,14 @@ import {
 import { post } from '~/utils/api';
 import url from '~/utils/api/urls';
 
-const createBlaBla = payload => axios.post(url.auth.login, payload);
-
 function* sendLoginDataSaga({ user }) {
   try {
-    const data = yield call(createBlaBla, { user });
-    //const data = yield call(post, url.auth.login, { user });
-    console.log(data);
-  } catch (e) {
-    console.log(e);
-    yield put(failLoginData(e));
-    // yield put(revertFailAction());
+    const data = yield call(post, url.auth.login, { user });
+    console.log('login is sucessfull', data);
+    yield put(successFulLogin());
+  } catch ({ errors }) {
+    yield put(failLoginData(errors));
+    yield put(revertFailAction());
   }
 }
 
