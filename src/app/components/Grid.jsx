@@ -15,6 +15,7 @@ Grid.propTypes = {
     PropTypes.element,
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.func,
+    PropTypes.string,
   ]).isRequired,
   className: PropTypes.string,
   classes: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,

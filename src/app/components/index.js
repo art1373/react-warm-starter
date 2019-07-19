@@ -6,10 +6,20 @@ import Typography from '@material-ui/core/Typography';
 import Form from '~/app/components/form/Form';
 import FormButton from '~/app/components/form/FormButton';
 import InputText from '~/app/components/form/InputText';
-import TextField from '~/app/components/TextField';
-import Button from '~/app/components/Button';
 
 /* Customized Components */
 import Grid from '~/app/components/Grid';
+import TextField from '~/app/components/TextField';
+import Button from '~/app/components/Button';
+import BaseLayout from '~/app/components/BaseLayout';
 
-export { Button, Form, FormButton, InputText, Grid, TextField, Typography };
+export {
+  BaseLayout,
+  Button,
+  Form,
+  FormButton,
+  InputText,
+  Grid,
+  TextField,
+  Typography,
+};

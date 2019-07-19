@@ -5,32 +5,27 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { getArticlesList } from '~/redux/actions';
+import { BaseLayout, Grid } from '~/app/components';
 
-const Home = ({
-  getArticles,
-  classes,
-  articlesList: { articles = [] } = {},
-}) => (
-  <div className={classes.root}>
+const Home = ({ classes }) => (
+  <>
     <Helmet title="home" />
-    <div>Home</div>
-    <button onClick={getArticles}>GET</button>
-    {articles.map(({ slug, title }) => (
-      <div key={slug}>{title}</div>
-    ))}
-  </div>
+    <BaseLayout>
+      <Grid className={classes.root}>Here will place articles</Grid>
+    </BaseLayout>
+  </>
 );
 
 Home.propTypes = {
   classes: PropTypes.instanceOf(Object).isRequired,
-  getArticles: PropTypes.func.isRequired,
-  articlesList: PropTypes.array.isRequired,
 };
 
-const styles = ({ palette }) =>
+const styles = () =>
   createStyles({
     root: {
-      backgroundColor: palette.primary.main,
+      alignItems: 'center',
+      flex: 1,
+      justifyContent: 'center',
     },
   });
 

@@ -2,6 +2,7 @@ import {
   FAIL_LOGIN_DATA,
   REVERT_FAIL_ACTION,
   SUCCESSFUL_LOGIN,
+  CALL_LOGOUT,
 } from '~/redux/actions';
 
 const loginError = (state = {}, { type, error, profile }) => {
@@ -24,6 +25,12 @@ const loginError = (state = {}, { type, error, profile }) => {
         errorMessage: undefined,
         profile,
         userIsLogin: true,
+      };
+    case CALL_LOGOUT:
+      return {
+        ...state,
+        profile: undefined,
+        userIsLogin: false,
       };
     default:
       return state;

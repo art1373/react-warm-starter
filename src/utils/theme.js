@@ -4,6 +4,7 @@ const theme = createMuiTheme({
   palette: {
     arvanGrey: '#818a91',
     background: {
+      darkGrey: '#373a3c',
       default: '#fff',
     },
     error: {

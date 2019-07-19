@@ -3,6 +3,7 @@ export const SEND_LOGIN_DATA = 'SEND_LOGIN_DATA';
 export const REVERT_FAIL_ACTION = 'REVERT_FAIL_ACTION';
 export const FAIL_LOGIN_DATA = 'FAIL_LOGIN_DATA';
 export const SUCCESSFUL_LOGIN = 'SUCCESSFUL_LOGIN';
+export const CALL_LOGOUT = 'CALL_LOGOUT';
 
 export const sendLoginData = user => ({
   type: SEND_LOGIN_DATA,
@@ -20,5 +21,9 @@ export const failLoginData = error => ({
 
 export const successFulLogin = profile => ({
   type: SUCCESSFUL_LOGIN,
-  profile
+  profile,
+});
+
+export const callLogout = () => ({
+  type: CALL_LOGOUT,
 });

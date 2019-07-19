@@ -15,10 +15,12 @@ import {
   failLoginData,
   revertFailAction,
   successFulLogin,
+  callLogout,
   SEND_LOGIN_DATA,
   FAIL_LOGIN_DATA,
   REVERT_FAIL_ACTION,
   SUCCESSFUL_LOGIN,
+  CALL_LOGOUT,
 } from './login';
 // register actions
 import {
@@ -43,10 +45,12 @@ export {
   failLoginData,
   revertFailAction,
   successFulLogin,
+  callLogout,
   SEND_LOGIN_DATA,
   FAIL_LOGIN_DATA,
   REVERT_FAIL_ACTION,
   SUCCESSFUL_LOGIN,
+  CALL_LOGOUT,
   // export register actions
   sendRegisterData,
   revertFailActionForRegister,

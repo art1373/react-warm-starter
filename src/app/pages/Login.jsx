@@ -69,7 +69,7 @@ const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
           </Grid>
           <Grid className={classes.buttonWrapper}>
             <FormButton fullWidth type="submit" label="login" />
-            {/* <FormButton type="reset" label="reset" variant="filled" /> */}
+            {/* <FormButton type="reset" label="reset" /> */}
           </Grid>
           <Grid>
             <Typography variant="h6" className={classes.registerHint}>
