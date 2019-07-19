@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useRef } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -9,7 +9,6 @@ import globalStyles from '~/utils/globalStyles';
 
 const Index = ({ userIsLogin }) => {
   const [isLogin, setLogin] = useState(false);
-  const mounted = useRef();
   useEffect(() => {
     const uil = !!readProfile('token');
     if (uil) {
@@ -18,12 +17,8 @@ const Index = ({ userIsLogin }) => {
   }, []);
   // eslint-disable-next-line
   useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-    } else {
-      const uil = !!readProfile('token');
-      setLogin(uil);
-    }
+    const uil = !!readProfile('token');
+    setLogin(uil);
   });
   return (
     <>
