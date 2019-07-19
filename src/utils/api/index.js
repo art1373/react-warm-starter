@@ -16,7 +16,7 @@ const _call = async ({ method, url, data: dataBody }) => {
       url,
     });
     return data;
-  } catch ({ response: { data } = {} }) {
+  } catch ({ response: { data } = {}, response }) {
     throw data;
   }
 };

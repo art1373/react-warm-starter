@@ -11,10 +11,10 @@ import url from '~/utils/api/urls';
 
 function* sendRegisterDataSaga({ user }) {
   try {
-    const data = yield call(post(url.auth.register, { user }));
+    const data = yield call(post, url.auth.register, { user });
     console.log(data);
-  } catch (e) {
-    yield put(failRegisterData(e));
+  } catch ({ errors }) {
+    yield put(failRegisterData(errors));
     yield put(revertFailActionForRegister());
   }
 }

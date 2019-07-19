@@ -16,6 +16,7 @@ import {
 import { RegisterSchema } from '~/utils/validations';
 import { sendRegisterData } from '~/redux/actions';
 import routesNames from '~/utils/routesNames';
+import { registerFailed, unknownError } from '~/utils/constants';
 
 const Register = ({
   showSnackBar,
@@ -27,10 +28,18 @@ const Register = ({
   useEffect(
     () =>
       error &&
-      showSnackBar({
-        message: errorMessage || 'Something is wrong',
-        variant: 'error',
-      }),
+      Object.entries(errorMessage || {}).forEach(err =>
+        showSnackBar({
+          message:
+            (
+              <span className={classes.snackBarErrorText}>
+                <b>{registerFailed}</b>
+                {` ${err[0]} ${err[1]}`}
+              </span>
+            ) || unknownError,
+          variant: 'error',
+        })
+      ),
     [error]
   );
   return (
@@ -119,6 +128,9 @@ const styles = ({ palette, spacing, shape, typography }) =>
     loginHint: {
       fontSize: typography.fontSize,
       marginTop: spacing(2),
+    },
+    snackBarErrorText: {
+      color: palette.error.contrastText,
     },
     typography: {
       color: palette.formHeader,
