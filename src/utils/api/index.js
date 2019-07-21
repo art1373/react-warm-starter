@@ -1,4 +1,5 @@
 import axios from 'axios';
+import getArticleDataPerPage from '~/utils/api/articles';
 
 const timeout = 10 * 1000;
 
@@ -24,3 +25,5 @@ const _call = async ({ method, url, data: dataBody }) => {
 export const get = url => _call({ method: 'GET', url });
 
 export const post = (url, data) => _call({ data, method: 'POST', url });
+
+export { getArticleDataPerPage };

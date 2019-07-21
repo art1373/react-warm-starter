@@ -6,7 +6,7 @@ import { createStyles, withStyles } from '~/utils/helpers';
 
 const Grid = ({ children, classes, className, ...rest }) => (
   <MuiGrid className={cn(classes.root, className)} {...rest}>
-    {children}
+    {typeof children === 'boolean' ? null : children}
   </MuiGrid>
 );
 
@@ -16,6 +16,7 @@ Grid.propTypes = {
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.func,
     PropTypes.string,
+    PropTypes.bool,
   ]).isRequired,
   className: PropTypes.string,
   classes: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,

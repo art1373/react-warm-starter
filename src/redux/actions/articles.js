@@ -3,8 +3,9 @@ export const GET_ARTICLES_LIST = 'GET_ARTICLES_LIST';
 export const SET_ARTICLES_LIST = 'SET_ARTICLES_LIST';
 export const FAIL_ARTICLES_LIST = 'FAIL_ARTICLES_LIST';
 
-export const getArticlesList = () => ({
+export const getArticlesList = perPage => ({
   type: GET_ARTICLES_LIST,
+  perPage,
 });
 
 export const setArticlesList = payload => ({

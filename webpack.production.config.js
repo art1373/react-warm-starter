@@ -48,6 +48,7 @@ module.exports = [
         'classnames',
         '@babel/polyfill',
         'yup',
+        'lodash.clonedeep',
       ],
     },
     output: {

@@ -4,12 +4,11 @@ import {
   failArticlesList,
   GET_ARTICLES_LIST,
 } from '~/redux/actions';
-import { get } from '~/utils/api';
-import url from '~/utils/api/urls';
+import { getArticleDataPerPage } from '~/utils/api';
 
-function* getArticlesListSaga() {
+function* getArticlesListSaga({ perPage }) {
   try {
-    const list = yield call(get, url.articles.list);
+    const list = yield call(getArticleDataPerPage, perPage);
     yield put(setArticlesList(list));
   } catch ({ errors }) {
     yield put(failArticlesList(errors));

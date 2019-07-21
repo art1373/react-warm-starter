@@ -12,6 +12,7 @@ import Grid from '~/app/components/Grid';
 import TextField from '~/app/components/TextField';
 import Button from '~/app/components/Button';
 import BaseLayout from '~/app/components/BaseLayout';
+import Table from '~/app/components/table';
 
 export {
   BaseLayout,
@@ -20,6 +21,7 @@ export {
   FormButton,
   InputText,
   Grid,
+  Table,
   TextField,
   Typography,
 };

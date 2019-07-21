@@ -7,3 +7,5 @@ export const registerFailed = 'Register Failed!';
 export const headerHeight = 80;
 
 export const sideBarWidth = 200;
+
+export const articlesPerPage = 10;
