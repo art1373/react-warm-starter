@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import {
   setArticlesList,
   failArticlesList,
@@ -9,10 +9,10 @@ import url from '~/utils/api/urls';
 
 function* getArticlesListSaga() {
   try {
-    const list = yield get(url.articles.list);
+    const list = yield call(get, url.articles.list);
     yield put(setArticlesList(list));
-  } catch (e) {
-    yield put(failArticlesList(e));
+  } catch ({ errors }) {
+    yield put(failArticlesList(errors));
   }
 }
 

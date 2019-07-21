@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStyles, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
@@ -7,17 +7,34 @@ import Helmet from 'react-helmet';
 import { getArticlesList } from '~/redux/actions';
 import { BaseLayout, Grid } from '~/app/components';
 
-const Home = ({ classes }) => (
-  <>
-    <Helmet title="home" />
-    <BaseLayout>
-      <Grid className={classes.root}>Here will place articles</Grid>
-    </BaseLayout>
-  </>
-);
+const Home = ({ classes, getArticles, articles: { articles = [] } }) => {
+  useEffect(() => {
+    getArticles();
+  }, []);
+  return (
+    <>
+      <Helmet title="home" />
+      <BaseLayout>
+        <Grid className={classes.root} ttt={console.log('sss')}>
+          {articles.map(({ title, slug }) => (
+            <span key={slug}>{title}</span>
+          ))}
+        </Grid>
+      </BaseLayout>
+    </>
+  );
+};
 
 Home.propTypes = {
+  articles: PropTypes.shape({
+    articles: PropTypes.arrayOf(PropTypes.object),
+  }),
   classes: PropTypes.instanceOf(Object).isRequired,
+  getArticles: PropTypes.func.isRequired,
+};
+
+Home.defaultProps = {
+  articles: { articles: [] },
 };
 
 const styles = () =>
@@ -29,7 +46,7 @@ const styles = () =>
     },
   });
 
-const mapStateToProps = ({ articlesList }) => ({ articlesList });
+const mapStateToProps = ({ articles }) => ({ articles });
 
 const mapDispatchToProps = dispatch => ({
   getArticles: () => dispatch(getArticlesList()),

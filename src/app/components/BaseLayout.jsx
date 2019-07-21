@@ -55,7 +55,7 @@ const styles = ({ palette, spacing }) =>
       marginLeft: 'auto',
     },
     main: {
-      flexGrow: 1,
+      width: `calc(100% - ${sideBarWidth}px)`,
     },
     root: {
       alignContent: 'flex-start',
