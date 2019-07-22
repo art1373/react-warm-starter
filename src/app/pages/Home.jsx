@@ -5,7 +5,13 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { getArticlesList } from '~/redux/actions';
-import { BaseLayout, Grid, Typography, Table } from '~/app/components';
+import {
+  BaseLayout,
+  Grid,
+  Typography,
+  Table,
+  Pagination,
+} from '~/app/components';
 import { tableBodyNormalizer } from '~/utils/helpers';
 import { articlesPerPage } from '~/utils/constants';
 
@@ -45,6 +51,9 @@ const Home = ({ classes, getArticles, articles: { articles = [] } }) => {
               <Table head={tableHead} body={tableBodyNormalizer(articles)} />
             )}
           </Grid>
+          <Grid className={classes.paginationWrapper}>
+            <Pagination />
+          </Grid>
         </Grid>
       </BaseLayout>
     </>
@@ -71,6 +80,11 @@ const styles = ({ spacing }) =>
     },
     pageTitle: {
       padding: spacing(2),
+    },
+    paginationWrapper: {
+      justifyContent: 'center',
+      marginBottom: spacing(2),
+      marginTop: 'auto',
     },
     root: {
       flexDirection: 'column',
