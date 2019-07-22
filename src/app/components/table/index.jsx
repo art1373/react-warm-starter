@@ -51,18 +51,30 @@ Table.propTypes = {
   ).isRequired,
 };
 
-const styles = ({}) =>
+const styles = ({ palette, typography, spacing }) =>
   createStyles({
     root: {
       overflow: 'auto',
       width: '100%',
     },
-    table: {},
+    table: {
+      height: 'calc(100% - 2px)',
+    },
     tableBody: {},
-    tableBodyCell: {},
+    tableBodyCell: {
+      whiteSpace: 'nowrap',
+    },
     tableBodyRow: {},
-    tableHead: {},
-    tableHeadCell: {},
+    tableHead: {
+      color: palette.background.darkGrey,
+    },
+    tableHeadCell: {
+      backgroundColor: palette.arvanTableHeader,
+      fontWeight: typography.fontWeightBold,
+      paddingBottom: spacing(1),
+      paddingTop: spacing(1),
+      whiteSpace: 'nowrap',
+    },
     tableHeadRow: {},
   });
 

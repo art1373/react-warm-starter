@@ -15,7 +15,8 @@ const tableHead = [
   { key: 'author', render: author => author.username, title: 'Author' },
   {
     key: 'tagList',
-    render: tags => tags.map(tag => <span key={tag}>{tag}</span>),
+    render: tags =>
+      tags.length ? tags.map(tag => <span key={tag}>{tag}</span>) : '-',
     title: 'Tags',
   },
   { key: 'description', title: 'Excerpt' },
@@ -73,8 +74,8 @@ const styles = ({ spacing }) =>
     },
     root: {
       flexDirection: 'column',
-      flexGrow: 1,
       height: '100%',
+      width: '100%',
     },
   });
 

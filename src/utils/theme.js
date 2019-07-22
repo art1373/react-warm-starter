@@ -3,6 +3,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 const theme = createMuiTheme({
   palette: {
     arvanGrey: '#818a91',
+    arvanTableHeader: '#dddddd',
     background: {
       darkGrey: '#373a3c',
       default: '#fff',

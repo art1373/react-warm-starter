@@ -55,6 +55,8 @@ const styles = ({ palette, spacing }) =>
       marginLeft: 'auto',
     },
     main: {
+      height: `calc(100% - ${headerHeight}px)`,
+      overflow: 'hidden',
       width: `calc(100% - ${sideBarWidth}px)`,
     },
     root: {
