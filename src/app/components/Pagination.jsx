@@ -139,6 +139,7 @@ const styles = ({ spacing, palette }) =>
     },
     page: {
       borderRadius: 0,
+      fontSize: 20,
       height: spacing(6),
       width: spacing(6),
     },
