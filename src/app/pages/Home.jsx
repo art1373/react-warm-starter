@@ -52,7 +52,7 @@ const Home = ({ classes, getArticles, articles: { articles = [] } }) => {
             )}
           </Grid>
           <Grid className={classes.paginationWrapper}>
-            <Pagination />
+            <Pagination onPageChange={console.log} />
           </Grid>
         </Grid>
       </BaseLayout>

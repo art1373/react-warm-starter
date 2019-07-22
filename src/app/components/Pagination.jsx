@@ -121,7 +121,7 @@ Pagination.defaultProps = {
   onPageChange: () => undefined,
   page: 1,
   size: 1,
-  total: 50,
+  total: 1,
 };
 
 const styles = ({ spacing, palette }) =>
