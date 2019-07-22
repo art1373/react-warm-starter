@@ -11,7 +11,6 @@ import {
 } from '~/app/components';
 import { createStyles, withStyles } from '~/utils/helpers';
 
-
 class Pagination extends PureComponent {
   get lastPage() {
     const { total, size } = this.props;
