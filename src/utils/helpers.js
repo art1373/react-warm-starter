@@ -3,6 +3,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import cloneDeep from 'lodash.clonedeep';
 import routesNames from '~/utils/routesNames';
+import { articlesPerPage } from '~/utils/constants';
 
 export { withStyles, createStyles };
 
@@ -19,9 +20,9 @@ export const logout = pushToLogin => {
   pushToLogin(routesNames.login);
 };
 
-export const tableBodyNormalizer = body =>
-  body.map((item, index) => {
+export const tableBodyNormalizer = (data, pageNumber) =>
+  data.map((item, index) => {
     const newItem = cloneDeep(item);
-    newItem.number = index + 1;
+    newItem.number = pageNumber * articlesPerPage + index + 1;
     return newItem;
   });

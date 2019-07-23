@@ -34,7 +34,11 @@ const tableHead = [
   { key: 'actions', render: () => <span>A</span>, title: '' },
 ];
 
-const Home = ({ classes, getArticles, articles: { articles = [] } }) => {
+const Home = ({
+  classes,
+  getArticles,
+  articles: { articles, articlesCount, pageNumber },
+}) => {
   useEffect(() => {
     getArticles(articlesPerPage);
   }, []);
@@ -47,12 +51,21 @@ const Home = ({ classes, getArticles, articles: { articles = [] } }) => {
             <Typography variant="h4">All Posts</Typography>
           </Grid>
           <Grid className={classes.pageContent}>
-            {!!articles.length && (
-              <Table head={tableHead} body={tableBodyNormalizer(articles)} />
+            {!!articlesCount && (
+              <Table
+                head={tableHead}
+                body={tableBodyNormalizer(articles, pageNumber)}
+              />
             )}
           </Grid>
           <Grid className={classes.paginationWrapper}>
-            <Pagination onPageChange={console.log} />
+            {!!articlesCount && (
+              <Pagination
+                onPageChange={pageNo => getArticles(articlesPerPage, pageNo)}
+                size={articlesPerPage}
+                total={articlesCount}
+              />
+            )}
           </Grid>
         </Grid>
       </BaseLayout>
@@ -63,13 +76,15 @@ const Home = ({ classes, getArticles, articles: { articles = [] } }) => {
 Home.propTypes = {
   articles: PropTypes.shape({
     articles: PropTypes.arrayOf(PropTypes.object),
+    articlesCount: PropTypes.number,
+    pageNumber: PropTypes.number,
   }),
   classes: PropTypes.instanceOf(Object).isRequired,
   getArticles: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {
-  articles: { articles: [] },
+  articles: { articles: [], articlesCount: undefined, pageNumber: 0 },
 };
 
 const styles = ({ spacing }) =>
@@ -93,10 +108,15 @@ const styles = ({ spacing }) =>
     },
   });
 
-const mapStateToProps = ({ articles }) => ({ articles });
+const mapStateToProps = ({ articles, articlesCount, pageNumber }) => ({
+  articles,
+  articlesCount,
+  pageNumber,
+});
 
 const mapDispatchToProps = dispatch => ({
-  getArticles: perPage => dispatch(getArticlesList(perPage)),
+  getArticles: (perPage, pageNumber = 0) =>
+    dispatch(getArticlesList(perPage, pageNumber)),
 });
 
 export default compose(

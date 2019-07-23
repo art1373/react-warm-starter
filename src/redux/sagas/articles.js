@@ -6,10 +6,11 @@ import {
 } from '~/redux/actions';
 import { getArticleDataPerPage } from '~/utils/api';
 
-function* getArticlesListSaga({ perPage }) {
+function* getArticlesListSaga({ perPage, pageNumber }) {
   try {
-    const list = yield call(getArticleDataPerPage, perPage);
-    yield put(setArticlesList(list));
+    const list = yield call(getArticleDataPerPage, perPage, pageNumber);
+    const numericalList = { ...list, pageNumber };
+    yield put(setArticlesList(numericalList));
   } catch ({ errors }) {
     yield put(failArticlesList(errors));
   }
