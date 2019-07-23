@@ -12,20 +12,29 @@ import {
 import { createStyles, withStyles } from '~/utils/helpers';
 
 class Pagination extends PureComponent {
+  constructor() {
+    super();
+
+    this.state = {
+      pageNumber: 0,
+    };
+
+    this.sendTheChangedPage = this.sendTheChangedPage.bind(this);
+  }
+
   get lastPage() {
     const { total, size } = this.props;
-    const floor = Math.floor(total / size);
-    const ceil = Math.ceil(total / size);
+    const floor = Math.floor(total / (size || 0.0001));
+    const ceil = Math.ceil(total / (size || 0.0001));
     return floor === ceil ? floor - 1 : floor;
   }
 
   get pages() {
-    const { page } = this.props;
-    const { lastPage } = this;
+    const { pageNumber } = this.state;
     const aroundCurrent = Array.from(
       { length: 5 },
-      (_, i) => i + page - 2
-    ).filter(p => p >= 0 && p <= lastPage);
+      (_, i) => i + pageNumber - 2
+    ).filter(p => p >= 0 && p <= this.lastPage);
     const lowerAroundCurrent = aroundCurrent[0];
     const lowerBand =
       lowerAroundCurrent <= 2
@@ -34,21 +43,30 @@ class Pagination extends PureComponent {
 
     const higherAroundCurrent = aroundCurrent[aroundCurrent.length - 1];
     const upperBand =
-      higherAroundCurrent >= lastPage - 2
-        ? [lastPage - 1, lastPage].filter(p => p > higherAroundCurrent)
-        : [NaN, lastPage];
+      higherAroundCurrent >= this.lastPage - 2
+        ? [this.lastPage - 1, this.lastPage].filter(
+            p => p > higherAroundCurrent
+          )
+        : [NaN, this.lastPage];
 
     return [...lowerBand, ...aroundCurrent, ...upperBand];
   }
 
   get prev() {
-    const { classes, onPageChange, page } = this.props;
+    const { pageNumber: p } = this.state;
+    const { classes } = this.props;
 
-    return page <= 0 ? null : (
+    return (
       <IconButton
+        disabled={p < 1}
         className={classes.button}
         color="inherit"
-        onClick={() => onPageChange(page - 1)}
+        onClick={() =>
+          this.setState(
+            ({ pageNumber }) => ({ pageNumber: pageNumber - 1 }),
+            this.sendTheChangedPage
+          )
+        }
       >
         <ChevronLeft />
       </IconButton>
@@ -56,14 +74,20 @@ class Pagination extends PureComponent {
   }
 
   get next() {
-    const { classes, onPageChange, page } = this.props;
-    const isLastPage = page === this.lastPage;
+    const { pageNumber: p } = this.state;
+    const { classes } = this.props;
 
-    return isLastPage ? null : (
+    return (
       <IconButton
+        disabled={p === this.lastPage}
         className={classes.button}
         color="inherit"
-        onClick={() => onPageChange(page + 1)}
+        onClick={() =>
+          this.setState(
+            ({ pageNumber }) => ({ pageNumber: pageNumber + 1 }),
+            this.sendTheChangedPage
+          )
+        }
       >
         <ChevronRight />
       </IconButton>
@@ -71,7 +95,8 @@ class Pagination extends PureComponent {
   }
 
   get pager() {
-    const { classes, onPageChange, page } = this.props;
+    const { pageNumber } = this.state;
+    const { classes } = this.props;
 
     return (
       <Grid className={classes.pager}>
@@ -80,8 +105,10 @@ class Pagination extends PureComponent {
             <IconButton
               name={`page-${p}`}
               color="inherit"
-              onClick={() => onPageChange(p)}
-              className={cn(classes.page, p === page && classes.current)}
+              onClick={() =>
+                this.setState({ pageNumber: p }, this.sendTheChangedPage)
+              }
+              className={cn(classes.page, p === pageNumber && classes.current)}
               key={`${p}-${i}`}
             >
               {p + 1}
@@ -95,6 +122,12 @@ class Pagination extends PureComponent {
       </Grid>
     );
   }
+
+  sendTheChangedPage() {
+    const { pageNumber } = this.state;
+    const { onPageChange } = this.props;
+    onPageChange(pageNumber);
+  };
 
   render() {
     const { classes } = this.props;
@@ -111,15 +144,12 @@ class Pagination extends PureComponent {
 
 Pagination.propTypes = {
   classes: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  onPageChange: PropTypes.func,
-  page: PropTypes.number,
+  onPageChange: PropTypes.func.isRequired,
   size: PropTypes.number,
   total: PropTypes.number,
 };
 
 Pagination.defaultProps = {
-  onPageChange: () => undefined,
-  page: 1,
   size: 1,
   total: 1,
 };
