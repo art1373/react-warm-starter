@@ -127,7 +127,7 @@ class Pagination extends PureComponent {
     const { pageNumber } = this.state;
     const { onPageChange } = this.props;
     onPageChange(pageNumber);
-  };
+  }
 
   render() {
     const { classes } = this.props;
