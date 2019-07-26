@@ -28,7 +28,7 @@ const tableHead = [
     key: 'tagList',
     render: tags =>
       tags.length ? (
-        <Grid style={{ flexWrap: 'wrap', whiteSpace: 'normal', width: 200 }}>
+        <Grid style={{ flexWrap: 'wrap', width: 200 }}>
           {tags.map(tag => (
             <span
               key={tag}
