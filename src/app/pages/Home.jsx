@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { withSnackBar } from 'material-snackbar-supplier';
 import { createStyles, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -13,7 +14,11 @@ import {
   Pagination,
 } from '~/app/components';
 import { tableBodyNormalizer } from '~/utils/helpers';
-import { articlesPerPage } from '~/utils/constants';
+import {
+  articlesPerPage,
+  articlesFailed,
+  unknownError,
+} from '~/utils/constants';
 
 const tableHead = [
   { key: 'number', title: '#' },
@@ -22,7 +27,27 @@ const tableHead = [
   {
     key: 'tagList',
     render: tags =>
-      tags.length ? tags.map(tag => <span key={tag}>{tag}</span>) : '-',
+      tags.length ? (
+        <Grid style={{ flexWrap: 'wrap', whiteSpace: 'normal', width: 200 }}>
+          {tags.map(tag => (
+            <span
+              key={tag}
+              style={{
+                backgroundColor: 'rgba(10,183,255,0.25)',
+                borderRadius: 4,
+                fontSize: 12,
+                marginBottom: 2,
+                marginRight: 2,
+                padding: '1px 4px',
+              }}
+            >
+              {tag}
+            </span>
+          ))}
+        </Grid>
+      ) : (
+        '-'
+      ),
     title: 'Tags',
   },
   { key: 'description', title: 'Excerpt' },
@@ -37,11 +62,29 @@ const tableHead = [
 const Home = ({
   classes,
   getArticles,
-  articles: { articles, articlesCount, pageNumber },
+  articles: { articles, articlesCount, pageNumber, error, errorMessage },
+  showSnackBar,
 }) => {
   useEffect(() => {
     getArticles(articlesPerPage);
   }, []);
+  useEffect(
+    () =>
+      error &&
+      Object.entries(errorMessage || {}).forEach(err =>
+        showSnackBar({
+          message:
+            (
+              <span className={classes.snackBarErrorText}>
+                <b>{articlesFailed}</b>
+                {` ${err[0]} ${err[1]}`}
+              </span>
+            ) || unknownError,
+          variant: 'error',
+        })
+      ),
+    [error]
+  );
   return (
     <>
       <Helmet title="home" />
@@ -77,17 +120,26 @@ Home.propTypes = {
   articles: PropTypes.shape({
     articles: PropTypes.arrayOf(PropTypes.object),
     articlesCount: PropTypes.number,
+    error: PropTypes.bool,
+    errorMessage: PropTypes.objectOf(PropTypes.string),
     pageNumber: PropTypes.number,
   }),
   classes: PropTypes.instanceOf(Object).isRequired,
   getArticles: PropTypes.func.isRequired,
+  showSnackBar: PropTypes.func.isRequired,
 };
 
 Home.defaultProps = {
-  articles: { articles: [], articlesCount: undefined, pageNumber: 0 },
+  articles: {
+    articles: [],
+    articlesCount: undefined,
+    error: undefined,
+    errorMessage: {},
+    pageNumber: 0,
+  },
 };
 
-const styles = ({ spacing }) =>
+const styles = ({ spacing, palette }) =>
   createStyles({
     pageContent: {
       overflow: 'hidden',
@@ -105,6 +157,9 @@ const styles = ({ spacing }) =>
       flexDirection: 'column',
       height: '100%',
       width: '100%',
+    },
+    snackBarErrorText: {
+      color: palette.error.contrastText,
     },
   });
 
@@ -125,5 +180,6 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   ),
+  withSnackBar,
   withStyles(styles)
 )(Home);

@@ -5,9 +5,11 @@ import {
   getArticlesList,
   failArticlesList,
   setArticlesList,
+  revertFailArticlesList,
   GET_ARTICLES_LIST,
   FAIL_ARTICLES_LIST,
   SET_ARTICLES_LIST,
+  REVERT_FAIL_ARTICLE_LIST,
 } from './articles';
 // login actions
 import {
@@ -37,9 +39,11 @@ export {
   getArticlesList,
   failArticlesList,
   setArticlesList,
+  revertFailArticlesList,
   GET_ARTICLES_LIST,
   FAIL_ARTICLES_LIST,
   SET_ARTICLES_LIST,
+  REVERT_FAIL_ARTICLE_LIST,
   // export login actions
   sendLoginData,
   failLoginData,

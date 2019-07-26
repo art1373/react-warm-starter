@@ -1,5 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import {
+  revertFailArticlesList,
   setArticlesList,
   failArticlesList,
   GET_ARTICLES_LIST,
@@ -13,6 +14,7 @@ function* getArticlesListSaga({ perPage, pageNumber }) {
     yield put(setArticlesList(numericalList));
   } catch ({ errors }) {
     yield put(failArticlesList(errors));
+    yield put(revertFailArticlesList());
   }
 }
 

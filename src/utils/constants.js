@@ -4,6 +4,8 @@ export const loginFailed = 'Login Failed!';
 
 export const registerFailed = 'Register Failed!';
 
+export const articlesFailed = 'Articles Failed';
+
 export const headerHeight = 80;
 
 export const sideBarWidth = 200;

@@ -87,7 +87,15 @@ const Login = ({ showSnackBar, classes, submitLogin, error, errorMessage }) => {
 
 Login.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  error: PropTypes.bool,
+  errorMessage: PropTypes.objectOf(PropTypes.string),
   showSnackBar: PropTypes.func.isRequired,
+  submitLogin: PropTypes.func.isRequired,
+};
+
+Login.defaultProps = {
+  error: undefined,
+  errorMessage: {},
 };
 
 const styles = ({ palette, spacing, shape, typography }) =>
