@@ -26,3 +26,5 @@ export const tableBodyNormalizer = (data, pageNumber) =>
     newItem.number = pageNumber * articlesPerPage + index + 1;
     return newItem;
   });
+
+export const isClient = () => typeof window !== 'undefined';

@@ -2,7 +2,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const getClientEnvironment = require('./src/utils/env');
 
 const assetsDirName = 'assets';
 const outputImagesDirName = 'img';
@@ -10,7 +9,6 @@ const outputFontsDirName = 'font';
 
 const distDir = path.join(__dirname, assetsDirName);
 const srcDir = path.join(__dirname, './src');
-const env = getClientEnvironment('development');
 
 module.exports = [
   {
@@ -110,7 +108,6 @@ module.exports = [
       },
     },
     plugins: [
-      new webpack.DefinePlugin(env.stringified),
       new BundleAnalyzerPlugin({
         analyzerPort: 6985,
         openAnalyzer: true,
@@ -169,6 +166,5 @@ module.exports = [
         },
       ],
     },
-    plugins: [new webpack.DefinePlugin(env.stringified)],
   },
 ];

@@ -1,12 +1,13 @@
-/* eslint-disable no-undef */
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducer from '~/redux/reducers';
 import mySaga from '~/redux/sagas';
+import { nodeEnv } from '~/utils/config';
+import { isClient } from '~/utils/helpers';
 
 const composeEnhancers =
-  (process.env.NODE_ENV !== 'production' &&
-    typeof window !== 'undefined' &&
+  (nodeEnv !== 'production' &&
+    isClient() &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
 

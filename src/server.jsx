@@ -11,6 +11,7 @@ import Template from '~/utils/template';
 import Index from '~/app';
 import store from '~/redux/store';
 import theme from '~/utils/theme';
+import appEnvironment from '~/utils/env';
 
 const ServerRenderer = () => (req, res) => {
   const context = {};
@@ -38,6 +39,7 @@ const ServerRenderer = () => (req, res) => {
 
   res.status(200).send(
     Template({
+      appEnvironment,
       helmet,
       jss,
       markup,

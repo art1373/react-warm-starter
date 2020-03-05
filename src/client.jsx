@@ -17,11 +17,7 @@ const ClientRender = () => {
   useEffect(() => {
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
-      jssStyles.remove();
-    }
-    const serverStore = document.querySelector('#store-server-side');
-    if (serverStore) {
-      serverStore.remove();
+      jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
 

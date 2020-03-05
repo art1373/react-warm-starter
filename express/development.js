@@ -3,13 +3,14 @@ const express = require('express');
 const app = express();
 const assetsDirName = 'assets';
 const webpack = require('webpack');
-// eslint-disable-next-line
-const config = require('./../webpack.development.config.js');
-
+const config = require('./../webpack.development.config.js'); // eslint-disable-line
 const compiler = webpack(config);
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackHotServerMiddleware = require('webpack-hot-server-middleware');
+const config = require('./../src/utils/config');
+
+const { port } = config;
 
 app.use(
   webpackDevMiddleware(compiler, {
@@ -28,7 +29,7 @@ app.use(
 
 app.use(webpackHotServerMiddleware(compiler));
 
-const PORT = process.env.PORT || 3000;
+const PORT = port || 3000;
 
 // eslint-disable-next-line consistent-return
 app.listen(PORT, error => {

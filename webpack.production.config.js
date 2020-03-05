@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const StatsPlugin = require('stats-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const getClientEnvironment = require('./src/utils/env');
 
 const assetsDirName = 'assets';
 const outputImagesDirName = 'img';
@@ -12,7 +11,6 @@ const outputFontsDirName = 'font';
 
 const distDir = path.join(__dirname, assetsDirName);
 const srcDir = path.join(__dirname, './src');
-const env = getClientEnvironment('production');
 
 module.exports = [
   {
@@ -111,7 +109,6 @@ module.exports = [
       },
     },
     plugins: [
-      new webpack.DefinePlugin(env.stringified),
       new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
@@ -190,7 +187,6 @@ module.exports = [
       ],
     },
     plugins: [
-      new webpack.DefinePlugin(env.stringified),
       new StatsPlugin(
         'stats.json',
         {

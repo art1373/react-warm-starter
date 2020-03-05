@@ -1,10 +1,11 @@
 import axios from 'axios';
 import getArticleDataPerPage from '~/utils/api/articles';
+import { apiUrl } from '~/utils/config';
 
 const timeout = 10 * 1000;
 
 const _instance = axios.create({
-  baseURL: `${process.env.API_URL}`,
+  baseURL: apiUrl,
   timeout,
 });
 

@@ -11,10 +11,12 @@ const ServerRendererPath = path.join(
   __dirname,
   `./../${assetsDirName}/js/server.js`
 );
-// eslint-disable-next-line import/no-dynamic-require
-const ServerRenderer = require(ServerRendererPath).default;
-// eslint-disable-next-line import/no-dynamic-require
-const Stats = require(ClientStatsPath);
+
+const ServerRenderer = require(ServerRendererPath).default; // eslint-disable-line import/no-dynamic-require
+const Stats = require(ClientStatsPath); // eslint-disable-line import/no-dynamic-require
+const config = require('./../src/utils/config');
+
+const { port } = config;
 
 app.use(
   `/${assetsDirName}`,
@@ -22,7 +24,7 @@ app.use(
 );
 app.use(ServerRenderer(Stats));
 
-const PORT = process.env.PORT || 3000;
+const PORT = port || 3000;
 
 // eslint-disable-next-line consistent-return
 app.listen(PORT, error => {
