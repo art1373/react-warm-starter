@@ -2,8 +2,8 @@
 import withStyles from '@material-ui/core/styles/withStyles';
 import createStyles from '@material-ui/core/styles/createStyles';
 import cloneDeep from 'lodash.clonedeep';
-import routesNames from '~/utils/routesNames';
-import { articlesPerPage } from '~/utils/constants';
+import routesNames from './routesNames';
+import { articlesPerPage } from './constants';
 
 export { withStyles, createStyles };
 

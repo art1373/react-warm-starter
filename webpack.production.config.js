@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const StatsPlugin = require('stats-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const dotEnv = require('dotenv').config({ path: `${__dirname}/.env` });
 
 const assetsDirName = 'assets';
 const outputImagesDirName = 'img';
@@ -30,13 +31,12 @@ module.exports = [
     entry: {
       client: `${srcDir}/client.jsx`,
       vendor: [
+        '@babel/polyfill',
         'react',
         'react-dom',
         'react-helmet',
         'react-router-dom',
         'axios',
-        'dotenv',
-        'dotenv-expand',
         'formik',
         // 'material-snackbar-supplier',
         'redux',
@@ -44,7 +44,6 @@ module.exports = [
         'redux-saga',
         'serialize-javascript',
         'classnames',
-        '@babel/polyfill',
         'yup',
         'lodash.clonedeep',
       ],
@@ -109,6 +108,9 @@ module.exports = [
       },
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env': dotEnv.parsed,
+      }),
       new CleanWebpackPlugin(),
       new webpack.DefinePlugin({
         'process.env': {

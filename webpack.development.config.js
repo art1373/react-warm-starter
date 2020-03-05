@@ -2,6 +2,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const dotEnv = require('dotenv').config({ path: `${__dirname}/.env` });
 
 const assetsDirName = 'assets';
 const outputImagesDirName = 'img';
@@ -28,13 +29,12 @@ module.exports = [
     entry: {
       client: `${srcDir}/client.jsx`,
       vendor: [
+        '@babel/polyfill',
         'react',
         'react-dom',
         'react-helmet',
         'react-router-dom',
         'axios',
-        'dotenv',
-        'dotenv-expand',
         'formik',
         // 'material-snackbar-supplier',
         'redux',
@@ -42,7 +42,6 @@ module.exports = [
         'redux-saga',
         'serialize-javascript',
         'classnames',
-        '@babel/polyfill',
         'yup',
         'lodash.clonedeep',
       ],
@@ -108,9 +107,12 @@ module.exports = [
       },
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env': dotEnv.parsed,
+      }),
       new BundleAnalyzerPlugin({
         analyzerPort: 6985,
-        openAnalyzer: true,
+        openAnalyzer: false,
       }),
     ],
   },
