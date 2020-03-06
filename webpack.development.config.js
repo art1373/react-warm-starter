@@ -1,8 +1,6 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 const path = require('path');
-const webpack = require('webpack');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const dotEnv = require('dotenv').config({ path: `${__dirname}/.env` });
 
 const assetsDirName = 'assets';
 const outputImagesDirName = 'img';
@@ -107,9 +105,6 @@ module.exports = [
       },
     },
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': dotEnv.parsed,
-      }),
       new BundleAnalyzerPlugin({
         analyzerPort: 6985,
         openAnalyzer: false,

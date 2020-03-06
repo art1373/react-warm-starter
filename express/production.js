@@ -1,15 +1,17 @@
+require('@babel/register');
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 
 const app = express();
 const assetsDirName = 'assets';
-const ClientStatsPath = path.join(
-  __dirname,
-  `./../${assetsDirName}/stats.json`
+const ClientStatsPath = path.resolve(
+  process.cwd(),
+  `${assetsDirName}/stats.json`
 );
 const ServerRendererPath = path.join(
-  __dirname,
-  `./../${assetsDirName}/js/server.js`
+  process.cwd(),
+  `${assetsDirName}/js/server.js`
 );
 
 const ServerRenderer = require(ServerRendererPath).default; // eslint-disable-line import/no-dynamic-require

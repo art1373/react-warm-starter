@@ -8,7 +8,7 @@
   "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "NODE_ENV=development nodemon --exec babel-node ./express/development.js",
+    "dev": "NODE_ENV=development nodemon ./express/development.js",
     "build": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors",
     "prod": "NODE_ENV=production webpack -p --config webpack.production.config.js --progress --profile --colors && nodemon --exec babel-node ./express/production.js",
     "pm2": "NODE_ENV=production pm2 start ./express/production.js"
@@ -17,6 +17,7 @@
     "*.{js,jsx}": "eslint --fix"
   },
   "dependencies": {
+    "@babel/register": "^7.8.6",
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
     "@material-ui/styles": "^4.2.0",
@@ -39,7 +40,6 @@
   "devDependencies": {
     "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
-    "@babel/node": "^7.8.7",
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
@@ -54,10 +54,10 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^0.28.4",
-    "dotenv-webpack": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",

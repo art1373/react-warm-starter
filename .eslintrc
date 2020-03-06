@@ -17,11 +17,18 @@
   ],
   "settings": {
     "import/resolver": {
+      "alias": {
+        "map": [
+          ["~", "./src"]
+        ],
+        "extensions": [".ts", ".tsx", ".js", ".jsx", ".json"]
+      },
       "node": {
-        // "paths": ["src"],
         "extensions": [
           ".js",
-          ".jsx"
+          ".jsx",
+          ".ts",
+          ".tsx"
         ]
       }
     }
@@ -41,7 +48,7 @@
     "react/jsx-filename-extension": [
       "error",
       {
-        "extensions": [".js", ".jsx"]
+        "extensions": [".tsx", ".jsx"]
       }
     ],
     "import/no-cycle": "off",

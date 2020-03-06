@@ -11,7 +11,7 @@ import Template from '~/utils/template';
 import Index from '~/app';
 import store from '~/redux/store';
 import theme from '~/utils/theme';
-import appEnvironment from '~/utils/env';
+import appEnvironment from '~/utils/config';
 
 const ServerRenderer = () => (req, res) => {
   const context = {};
