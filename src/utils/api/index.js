@@ -19,7 +19,7 @@ const _call = async ({ method, url, data: dataBody }) => {
     });
     return data;
   } catch ({
-    response: { data = { errors: { Unknown: 'Error is happen' } } } = {},
+    response: { data = { errors: { Unknown: 'an Error occured!' } } } = {},
   }) {
     throw data;
   }
