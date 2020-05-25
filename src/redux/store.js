@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import reducer from '~/redux/reducers';
-import mySaga from '~/redux/sagas';
+import rootSaga from '~/redux/sagas';
 import { nodeEnv } from '~/utils/config';
 import { isClient } from '~/utils/helpers';
 
@@ -18,4 +18,4 @@ export default createStore(
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
